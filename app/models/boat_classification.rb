@@ -1,4 +1,4 @@
-class BoatClassification < ActiveRecord::Base
+class BoatClassification < ApplicationRecord
   belongs_to :boat
   belongs_to :classification
 end

@@ -1,4 +1,4 @@
-class Classification < ActiveRecord::Base
+class Classification < ApplicationRecord
   has_many :boat_classifications
   has_many :boats, through: :boat_classifications
 
