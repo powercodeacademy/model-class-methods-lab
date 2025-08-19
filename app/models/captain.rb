@@ -1,4 +1,4 @@
-class Captain < ActiveRecord::Base
+class Captain < ApplicationRecord
   has_many :boats
 
   def self.catamaran_operators

@@ -1,4 +1,4 @@
-class CreateBoats < ActiveRecord::Migration[5.0]
+class CreateBoats < ActiveRecord::Migration[7.1]
   def change
     create_table :boats do |t|
       t.string  :name

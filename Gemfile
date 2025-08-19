@@ -1,9 +1,13 @@
 source 'https://rubygems.org'
 
-gem 'rails', '5.0.7.1'
-gem 'sqlite3', '~>1.3.6'
+ruby '3.3.5'
 
+gem 'rails', '~> 7.1.0'
+gem 'sqlite3', '~> 1.6'
+gem 'puma', '~> 6.0'
+gem 'webrick', '~> 1.8'
+gem 'ostruct', '~> 0.6'
 
 group :development, :test do
-  gem "rspec-rails"
+  gem 'rspec-rails', '~> 6.0'
 end
