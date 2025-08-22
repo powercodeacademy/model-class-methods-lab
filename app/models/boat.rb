@@ -1,5 +1,5 @@
 class Boat < ApplicationRecord
-  belongs_to  :captain
+  belongs_to  :captain, optional: true
   has_many    :boat_classifications
   has_many    :classifications, through: :boat_classifications
 
