@@ -10,18 +10,3 @@ Dir[Rails.root.join("spec/support/**/*.rb")].sort.each { |f| require f }
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.check_all_pending! if defined?(ActiveRecord::Migration)
-
-RSpec.configure do |config|
-  config.fixture_paths = ["#{::Rails.root}/spec/fixtures"]
-  config.use_transactional_fixtures = false
-  config.infer_base_class_for_anonymous_controllers = false
-  config.order = "default"
-
-  config.before do
-    Rails.application.load_seed
-  end
-
-  config.after do
-    (ActiveRecord::Base.subclasses - [ActiveRecord::SchemaMigration]).each(&:delete_all)
-  end
-end
