@@ -1,22 +1,22 @@
-cook = Captain.create(name: "Captain Cook", admiral: true)
-kidd = Captain.create(name: "Captain Kidd", admiral: true)
-william = Captain.create(name: "William Kyd", admiral: false)
-arel = Captain.create(name: "Arel English", admiral: true)
-henry = Captain.create(name: "Henry Hudson", admiral: false)
-samuel = Captain.create(name: "Samuel Axe", admiral: false)
+cook = Captain.create(name: 'Captain Cook', admiral: true)
+kidd = Captain.find_or_create_by(name: 'Captain Kidd') { |c| c.admiral = true }
+william = Captain.find_or_create_by(name: 'William Kyd') { |c| c.admiral = false }
+arel = Captain.find_or_create_by(name: 'Arel English') { |c| c.admiral = true }
+henry = Captain.find_or_create_by(name: 'Henry Hudson') { |c| c.admiral = false }
+samuel = Captain.find_or_create_by(name: 'Samuel Axe') { |c| c.admiral = false }
 
-h_28 = Boat.create(name: "H 28", length: 27)
-nacra_17 = Boat.create(name: "Nacra 17", length: 17)
-regulator = Boat.create(name: "Regulator 34SS", length: 34)
-zodiac = Boat.create(name: "Zodiac CZ7", length: 24)
-boston_whaler = Boat.create(name: "Boston Whaler", length: 13)
-forty_niner = Boat.create(name: "49er", length: 16)
-cape_dory = Boat.create(name: "Cape Dory", length: 28)
-laser = Boat.create(name: "Laser", length: 14)
-triton = Boat.create(name: "Triton 21 TRX", length: 21)
-sun_tracker = Boat.create(name: "Sun Tracker Regency 254 XP3", length: 27)
-harpoon = Boat.create(name: "Harpoon 4.7", length: 15.5)
-sunfish = Boat.create(name: "Sunfish", length: 13.7)
+h_28 = Boat.find_or_create_by(name: 'H 28') { |b| b.length = 27 }
+nacra_17 = Boat.find_or_create_by(name: 'Nacra 17') { |b| b.length = 17 }
+regulator = Boat.find_or_create_by(name: 'Regulator 34SS') { |b| b.length = 34 }
+zodiac = Boat.find_or_create_by(name: 'Zodiac CZ7') { |b| b.length = 24 }
+boston_whaler = Boat.find_or_create_by(name: 'Boston Whaler') { |b| b.length = 13 }
+forty_niner = Boat.find_or_create_by(name: '49er') { |b| b.length = 16 }
+cape_dory = Boat.find_or_create_by(name: 'Cape Dory') { |b| b.length = 28 }
+laser = Boat.find_or_create_by(name: 'Laser') { |b| b.length = 14 }
+triton = Boat.find_or_create_by(name: 'Triton 21 TRX') { |b| b.length = 21 }
+sun_tracker = Boat.find_or_create_by(name: 'Sun Tracker Regency 254 XP3') { |b| b.length = 27 }
+harpoon = Boat.find_or_create_by(name: 'Harpoon 4.7') { |b| b.length = 15.5 }
+sunfish = Boat.find_or_create_by(name: 'Sunfish') { |b| b.length = 13.7 }
 
 h_28.captain = cook
 nacra_17.captain = kidd
@@ -40,27 +40,31 @@ laser.save
 triton.save
 sun_tracker.save
 
-ketch = Classification.create(name: "Ketch")
-sailboat = Classification.create(name: "Sailboat")
-catamaran = Classification.create(name: "Catamaran")
-sloop = Classification.create(name: "Sloop")
-motorboat = Classification.create(name: "Motorboat")
-center = Classification.create(name: "Center Console")
-rib = Classification.create(name: "RIB")
-trawler = Classification.create(name: "Trawler")
-cat_rig = Classification.create(name: "Cat Rig Boat")
-bass = Classification.create(name: "Bass Boat")
-pontoon = Classification.create(name: "Pontoon Boat")
+ketch = Classification.find_or_create_by(name: 'Ketch')
+sailboat = Classification.find_or_create_by(name: 'Sailboat')
+catamaran = Classification.find_or_create_by(name: 'Catamaran')
+sloop = Classification.find_or_create_by(name: 'Sloop')
+motorboat = Classification.find_or_create_by(name: 'Motorboat')
+center = Classification.find_or_create_by(name: 'Center Console')
+rib = Classification.find_or_create_by(name: 'RIB')
+trawler = Classification.find_or_create_by(name: 'Trawler')
+cat_rig = Classification.find_or_create_by(name: 'Cat Rig Boat')
+bass = Classification.find_or_create_by(name: 'Bass Boat')
+pontoon = Classification.find_or_create_by(name: 'Pontoon Boat')
 
-h_28.classifications << [ketch, sailboat]
-nacra_17.classifications << [catamaran, sloop, sailboat]
-regulator.classifications << [motorboat, center]
-zodiac.classifications << [rib, motorboat, center]
-boston_whaler.classifications << [motorboat]
-forty_niner.classifications << [sailboat, sloop]
-cape_dory.classifications << [motorboat, trawler]
-laser.classifications << [sailboat, cat_rig]
-triton.classifications << [motorboat, bass]
-sun_tracker.classifications << [motorboat, pontoon, catamaran]
-harpoon.classifications << [sailboat, sloop]
-sunfish.classifications << [sailboat, cat_rig]
+[[h_28, [ketch, sailboat]],
+ [nacra_17, [catamaran, sloop, sailboat]],
+ [regulator, [motorboat, center]],
+ [zodiac, [rib, motorboat, center]],
+ [boston_whaler, [motorboat]],
+ [forty_niner, [sailboat, sloop]],
+ [cape_dory, [motorboat, trawler]],
+ [laser, [sailboat, cat_rig]],
+ [triton, [motorboat, bass]],
+ [sun_tracker, [motorboat, pontoon, catamaran]],
+ [harpoon, [sailboat, sloop]],
+ [sunfish, [sailboat, cat_rig]]].each do |boat, classes|
+  classes.each do |classification|
+    boat.classifications << classification unless boat.classifications.include?(classification)
+  end
+end
