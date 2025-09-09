@@ -1,4 +1,4 @@
-class CreateBoatClassifications < ActiveRecord::Migration[5.0]
+class CreateBoatClassifications < ActiveRecord::Migration[7.1]
   def change
     create_table :boat_classifications do |t|
       t.integer :boat_id
