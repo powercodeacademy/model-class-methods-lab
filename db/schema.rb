@@ -14,8 +14,8 @@ ActiveRecord::Schema[7.1].define(version: 2014_03_13_192430) do
   create_table "boat_classifications", force: :cascade do |t|
     t.integer "boat_id"
     t.integer "classification_id"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "boats", force: :cascade do |t|
